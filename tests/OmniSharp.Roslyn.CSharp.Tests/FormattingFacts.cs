@@ -115,7 +115,6 @@ class C {
                 Assert.True(false);
             }
             value = value.Remove(idx, 1);
-            idx = idx - 1;
             return Tuple.Create(CSharpSyntaxTree.ParseText(value), idx);
         }
 

@@ -17,7 +17,7 @@ namespace OmniSharp.Json
             if (reader.TokenType == JsonToken.Null)
                 return null;
 
-            if (!Configuration.ZeroBasedIndicies)
+            if (Configuration.ZeroBasedIndicies)
             {
                 return serializer.Deserialize(reader, objectType);
             }
@@ -61,7 +61,7 @@ namespace OmniSharp.Json
                 return;
             }
 
-            if (!Configuration.ZeroBasedIndicies)
+            if (Configuration.ZeroBasedIndicies)
             {
                 serializer.Serialize(writer, value);
                 return;

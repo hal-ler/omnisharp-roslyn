@@ -30,14 +30,14 @@ namespace OmniSharp.Models
                         // when you are line,column-based. This code extends text edits which just overlap
                         // a with a line break to its full line break
 
-                        if (span.Start > 0 && newText[0] == '\n' && text[span.Start - 1] == '\r')
+                        if (span.Start > 0 && newText[0] == '\n' && text[span.Start] == '\r')
                         {
                             // text: foo\r\nbar\r\nfoo
                             // edit:      [----)
-                            span = TextSpan.FromBounds(span.Start - 1, span.End);
+                            span = TextSpan.FromBounds(span.Start, span.End);
                             prefix = "\r";
                         }
-                        if (span.End < text.Length - 1 && newText[newText.Length - 1] == '\r' && text[span.End] == '\n')
+                        if (span.End < text.Length && newText[newText.Length] == '\r' && text[span.End] == '\n')
                         {
                             // text: foo\r\nbar\r\nfoo
                             // edit:        [----)
@@ -50,10 +50,10 @@ namespace OmniSharp.Models
                     return new LinePositionSpanTextChange()
                     {
                         NewText = prefix + newText + postfix,
-                        StartLine = linePositionSpan.Start.Line + 1,
-                        StartColumn = linePositionSpan.Start.Character + 1,
-                        EndLine = linePositionSpan.End.Line + 1,
-                        EndColumn = linePositionSpan.End.Character + 1
+                        StartLine = linePositionSpan.Start.Line,
+                        StartColumn = linePositionSpan.Start.Character,
+                        EndLine = linePositionSpan.End.Line,
+                        EndColumn = linePositionSpan.End.Character
                     };
                 });
         }

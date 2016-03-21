@@ -204,7 +204,7 @@ namespace OmniSharp.Tests
         {
             var document = workspace.GetDocument(result.FileName);
             var sourceText = await document.GetTextAsync();
-            var position = sourceText.Lines.GetPosition(new LinePosition(result.Line - 1, result.Column - 1));
+            var position = sourceText.Lines.GetPosition(new LinePosition(result.Line, result.Column));
             var semanticModel = await document.GetSemanticModelAsync();
             return SymbolFinder.FindSymbolAtPosition(semanticModel, position, workspace);
         }
